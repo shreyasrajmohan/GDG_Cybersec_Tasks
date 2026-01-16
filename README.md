@@ -4,17 +4,16 @@ This repository is for my GDG Cybersecurity Recruitment Tasks.
 This task is a CTF where the hidden flag was presented in the form of three fragments in three different folders, which were *gdg_part1, gdg_part2, gdg_part3*.
 
 ### GDG_PART1
-This folder comprised of a .git folder, a python file called app.py, a text file called xotwod.txt and a README.txt text file.
+This folder comprised of a .git folder, a python file called app.py, a text file called xotwod.txt that contains lyrics to the song "Starry Eyes - The Weeknd" and a README.txt text file.
 I first went through the README and understood that there's some file or folder that's hidden in this directory.
-I then opened the xotwod.txt file and just found some lyrics to Starry Eyes by The Weeknd.
 I then opened the app.py in VSCode to check out the contents in it, in which there was something that looked like this:
-`totally_real_flag = base64.b64encode(b"oopsies :( not the real flag lol, keep looking!").decode()`
-which was obviously just to troll, so I ignore that but something else caught my eye which was:
-`secret = "d2FpdCwgd2hhdCBpZiB0aGVyZSBhcmUgaGlkZGVuIGZpbGVzIGluIHRoZSBkaXJlY3Rvcnkgd29haC4uLg=="`
-and I was curious, so I wanted to decode it. I observe the two equal to signs at the end which indicates that it is base64 encrypted, so I ran this command in my Kali Linux Terminal:
-`echo "d2FpdCwgd2hhdCBpZiB0aGVyZSBhcmUgaGlkZGVuIGZpbGVzIGluIHRoZSBkaXJlY3Rvcnkgd29haC4uLg==" | base64 -d`
+```totally_real_flag = base64.b64encode(b"oopsies :( not the real flag lol, keep looking!").decode()```
+which was clearly a decoy, so I ignore that but something else caught my eye which was:
+```secret = "d2FpdCwgd2hhdCBpZiB0aGVyZSBhcmUgaGlkZGVuIGZpbGVzIGluIHRoZSBkaXJlY3Rvcnkgd29haC4uLg=="```
+and I was curious, so I wanted to decode it. I observe the two equal to signs at the end which indicates that it is base64 encoded, so I ran this command in my Kali Linux Terminal:
+```echo "d2FpdCwgd2hhdCBpZiB0aGVyZSBhcmUgaGlkZGVuIGZpbGVzIGluIHRoZSBkaXJlY3Rvcnkgd29haC4uLg==" | base64 -d```
 which gave me the following as output:
-`wait, what if there are hidden files in the directory woah...`
+```wait, what if there are hidden files in the directory woah...```
 which then confirmed my assumptions.
 
 So I head straight to the .git folder and checked if there's anything in the files present.
@@ -45,7 +44,29 @@ I then ran the image through *zsteg* in my KALI Linux System which then threw th
 
 <img width="388" height="88" alt="image" src="https://github.com/user-attachments/assets/0e317cda-a794-49f4-b24d-68ee3699f49c" />
 
-So yeah, this took barely 5 minutes for me to get the flag fragment, but here, a confusion arises, is the fragment *10:armykn1f3_* or *armykn1f3_*?
-Since the rules said that the flag is in a readable format, I just considered the latter.
+The tool immediately identified the hidden data, but here, a confusion arises, is the fragment *10:armykn1f3_* or *armykn1f3_*?
+Well, the "10:" in the output is the way zsteg gives the output, its the offset/ID so we exclude it.
 
 Second Part: *armykn1f3_*
+
+### GDG_PART3
+This folder comprised of a qr_code_zipbomb.rar compressed file and a README.txt text file.
+On reading the README and extraction and inspection of the folder, we can find 3000 QR Codes .png files, each with different codes.
+Doing this manually would be such a hassle, thankfully, I already have Pillow and Pyzbar installed in my system.
+I then open up VSCode and code the main file extension verification code and the data extraction code and also code to put all the results into a file called decoded.txt text file.
+This Code is Present in this repository so make sure to check that out!
+I then opened this decoded.txt in Notepad++ and use the macro automation to delete all the unnecessary file names and sort only the extracted data.
+This data is then carefully examined until I find the anomalous data `PDwtLS0tcGFydDM9Z2cxb2x9LS0tLT4+` on qr_1967.
+I then try decoding it using base64, it gave me the following output:
+
+<img width="438" height="61" alt="image" src="https://github.com/user-attachments/assets/45f1933f-ab91-405d-a963-109e757c7910" />
+
+which means,
+
+Third Part: *gg1ol}*
+
+Combining all three parts together, the final flag is 
+
+*```gdg{sw1ss_armykn1f3_gg1ol}```*
+
+### Conclusion
