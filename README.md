@@ -34,3 +34,14 @@ I then did `git restore --worktree config.txt` which gave me the file and on ope
 
 I had my first fragment of the flag! 
 First Part: *gdg{sw1ss_*
+
+### GDG_PART2
+This folder comprised of just two files, a README.txt text file and a heheheha.png image.
+The image: <img width="1080" height="1080" alt="heheheha" src="https://github.com/user-attachments/assets/5906b3b2-bb5c-4204-874c-47a1b455883c" />
+There was nothing special about the image, which is actually the reason for the thought of *image steganography* went past my mind.
+I then ran the image through *zsteg* in my KALI Linux System which then threw the output:
+<img width="388" height="88" alt="image" src="https://github.com/user-attachments/assets/0e317cda-a794-49f4-b24d-68ee3699f49c" />
+So yeah, this took barely 5 minutes for me to get the flag fragment, but here, a confusion arises, is the fragment *10:armykn1f3_* or *armykn1f3_*?
+Since the rules said that the flag is in a readable format, I just considered the latter.
+
+Second Part: *armykn1f3_*
