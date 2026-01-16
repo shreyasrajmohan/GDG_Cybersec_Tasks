@@ -18,19 +18,23 @@ which then confirmed my assumptions.
 
 So I head straight to the .git folder and checked if there's anything in the files present.
 As soon as I clicked on the COMMIT_EDITMSG file and went through the file, I understood that there was a commit.txt file in the previous versions which was then deleted.
-<img width="689" height="509" alt="image" src="https://github.com/user-attachments/assets/71792e5f-f443-4d43-8422-2944cf6dd6ca" />
+
+<img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/71792e5f-f443-4d43-8422-2944cf6dd6ca" />
 
 I then quickly open my Command Prompt in that directory and do the following:
 `git status` to check for deleted files, which then showed two files which were deleted.
 In order to restore those files, I then used `git restore --staged decoy.txt` but since it didn't work I used `git restore --worktree decoy.txt` which immediately gave me my file, but it had nothing in it.
-<img width="1632" height="897" alt="image" src="https://github.com/user-attachments/assets/e3ab4e32-22d0-4dea-b484-06135fbc3335" />
+
+<img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/e3ab4e32-22d0-4dea-b484-06135fbc3335" />
 
 I then wanted to view the previous versions, so I did `git log` which gave me the following results:
-<img width="1296" height="848" alt="image" src="https://github.com/user-attachments/assets/d3ab12ea-2511-4f39-901b-6ead9d04dcd0" />
+
+<img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/d3ab12ea-2511-4f39-901b-6ead9d04dcd0" />
 
 There! I had my answer! I quickly reset the version by using `git reset --soft <previous Commit ID>` and used `git status` to check if the *config.txt* file was present and there it was.
 I then did `git restore --worktree config.txt` which gave me the file and on opening the file.
-<img width="1905" height="537" alt="image" src="https://github.com/user-attachments/assets/030d5d8b-d982-45e2-88d1-e2dde50fa44f" />
+
+<img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/030d5d8b-d982-45e2-88d1-e2dde50fa44f" />
 
 I had my first fragment of the flag! 
 First Part: *gdg{sw1ss_*
@@ -38,11 +42,13 @@ First Part: *gdg{sw1ss_*
 ### GDG_PART2
 This folder comprised of just two files, a README.txt text file and a heheheha.png image.
 The image: 
-<img width="1080" height="1080" alt="heheheha" src="https://github.com/user-attachments/assets/5906b3b2-bb5c-4204-874c-47a1b455883c" />
+
+<img width="450" height="450" alt="heheheha" src="https://github.com/user-attachments/assets/5906b3b2-bb5c-4204-874c-47a1b455883c" />
+
 There was nothing special about the image, which is actually the reason for the thought of *image steganography* went past my mind.
 I then ran the image through *zsteg* in my KALI Linux System which then threw the output:
 
-<img width="388" height="88" alt="image" src="https://github.com/user-attachments/assets/0e317cda-a794-49f4-b24d-68ee3699f49c" />
+<img width="350" height="75" alt="image" src="https://github.com/user-attachments/assets/0e317cda-a794-49f4-b24d-68ee3699f49c" />
 
 The tool immediately identified the hidden data, but here, a confusion arises, is the fragment *10:armykn1f3_* or *armykn1f3_*?
 Well, the "10:" in the output is the way zsteg gives the output, its the offset/ID so we exclude it.
@@ -54,7 +60,9 @@ This folder comprised of a qr_code_zipbomb.rar compressed file and a README.txt 
 On reading the README and extraction and inspection of the folder, we can find 3000 QR Codes .png files, each with different codes.
 Doing this manually would be such a hassle, thankfully, I already have Pillow and Pyzbar installed in my system.
 I then open up VSCode and code the main file extension verification code and the data extraction code and also code to put all the results into a file called decoded.txt text file.
-This Code is Present in this repository so make sure to check that out!
+
+<a href="https://github.com/shreyasrajmohan/GDG_Cybersec_Tasks/blob/main/script.py">View the Automation Script Here!</a>
+
 I then opened this decoded.txt in Notepad++ and use the macro automation to delete all the unnecessary file names and sort only the extracted data.
 This data is then carefully examined until I find the anomalous data `PDwtLS0tcGFydDM9Z2cxb2x9LS0tLT4+` on qr_1967.
 I then try decoding it using base64, it gave me the following output:
@@ -70,3 +78,4 @@ Combining all three parts together, the final flag is
 *```gdg{sw1ss_armykn1f3_gg1ol}```*
 
 ### Conclusion
+Great challenge. It bridged the gap between theory and practice, forcing me to script my own way out of a mess. I’m walking away with a slight headache, a flag, and much a better approach to coding.
