@@ -29,6 +29,8 @@ I then wanted to view the previous versions, so I did `git log` which gave me th
 <img width="1296" height="848" alt="image" src="https://github.com/user-attachments/assets/d3ab12ea-2511-4f39-901b-6ead9d04dcd0" />
 
 There! I had my answer! I quickly reset the version by using `git reset --soft <previous Commit ID>` and used `git status` to check if the *config.txt* file was present and there it was.
+I then did `git restore --worktree config.txt` which gave me the file and on opening the file.
+<img width="1905" height="537" alt="image" src="https://github.com/user-attachments/assets/030d5d8b-d982-45e2-88d1-e2dde50fa44f" />
 
-I then did `git restore --worktree config.txt` which gave me the file and on opening the file I had my first fragment of the flag! 
+I had my first fragment of the flag! 
 First Part: *gdg{sw1ss_*
