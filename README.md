@@ -20,6 +20,7 @@ which then confirmed my assumptions.
 So I head straight to the .git folder and checked if there's anything in the files present.
 As soon as I clicked on the COMMIT_EDITMSG file and went through the file, I understood that there was a commit.txt file in the previous versions which was then deleted.
 <img width="689" height="509" alt="image" src="https://github.com/user-attachments/assets/71792e5f-f443-4d43-8422-2944cf6dd6ca" />
+
 I then quickly open my Command Prompt in that directory and do the following:
 `git status` to check for deleted files, which then showed two files which were deleted.
 In order to restore those files, I then used `git restore --staged decoy.txt` but since it didn't work I used `git restore --worktree decoy.txt` which immediately gave me my file, but it had nothing in it.
@@ -37,10 +38,13 @@ First Part: *gdg{sw1ss_*
 
 ### GDG_PART2
 This folder comprised of just two files, a README.txt text file and a heheheha.png image.
-The image: <img width="1080" height="1080" alt="heheheha" src="https://github.com/user-attachments/assets/5906b3b2-bb5c-4204-874c-47a1b455883c" />
+The image: 
+<img width="1080" height="1080" alt="heheheha" src="https://github.com/user-attachments/assets/5906b3b2-bb5c-4204-874c-47a1b455883c" />
 There was nothing special about the image, which is actually the reason for the thought of *image steganography* went past my mind.
 I then ran the image through *zsteg* in my KALI Linux System which then threw the output:
+
 <img width="388" height="88" alt="image" src="https://github.com/user-attachments/assets/0e317cda-a794-49f4-b24d-68ee3699f49c" />
+
 So yeah, this took barely 5 minutes for me to get the flag fragment, but here, a confusion arises, is the fragment *10:armykn1f3_* or *armykn1f3_*?
 Since the rules said that the flag is in a readable format, I just considered the latter.
 
