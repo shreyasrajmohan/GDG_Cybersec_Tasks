@@ -79,3 +79,36 @@ Combining all three parts together, the final flag is
 
 ### Conclusion
 Great challenge. It bridged the gap between theory and practice, forcing me to script my own way out of a mess. I’m walking away with a slight headache, a flag, and much a better approach to coding.
+
+
+## Task-1B: apple_pi3
+
+This task is a CTF where the flag is hidden within a binary file which is protected with modern security mechanisms and basic obfuscation. This is not just a CTF but we are also asked to analyze the binary and determine whether the hidden data can still be discovered.
+
+### Approach and Process
+
+I opened the binary in Ghidra, a popular reverse engineering tool, which provided decompiled code and a function list in the Symbol Tree window.
+
+<img width="850" height="450" alt="image" src="https://github.com/user-attachments/assets/fe7b8690-71b7-45db-8b93-d00d6ab6c530" />
+
+I then proceeded to view all the functions in the Symbol Tree window and found something suspicious called `def_nothing_important`.
+
+<img width="269" height="216" alt="image" src="https://github.com/user-attachments/assets/d3d01864-73e2-444e-969e-3a975920dac4" />
+
+I realized that this function contained the core obfuscation logic responsible for hiding the flag.
+
+<img width="785" height="450" alt="image" src="https://github.com/user-attachments/assets/465668fd-5225-4172-9b29-439243ca989e" />
+
+After cleaning up and correcting the decompiled C code to make it compilable, I recompiled and executed it, which revealed the flag!
+
+<a href = "https://github.com/shreyasrajmohan/GDG_Cybersec_Tasks/blob/main/applepie.c" >View the corrected C code here!</a>
+
+<img width="850" height="450" alt="image" src="https://github.com/user-attachments/assets/d729490f-d3b0-40e8-9113-58f3a47d2d2c" />
+
+### Result
+
+Flag: ```gdg{P1E_3xpl01ted_lol}```
+
+### Conclusion
+
+This challenge shows that basic obfuscation and modern binary protections are not sufficient to fully hide sensitive data. By analyzing the binary in Ghidra and understanding the obfuscated logic, the hidden flag was successfully recovered. The task reinforces the effectiveness of reverse engineering techniques and the importance of stronger protection methods.
