@@ -112,3 +112,56 @@ Flag: ```gdg{P1E_3xpl01ted_lol}```
 ### Conclusion
 
 This challenge shows that basic obfuscation and modern binary protections are not sufficient to fully hide sensitive data. By analyzing the binary in Ghidra and understanding the obfuscated logic, the hidden flag was successfully recovered. The task reinforces the effectiveness of reverse engineering techniques and the importance of stronger protection methods.
+
+## Task-2: Hidden Recipe
+
+In this task, there's a virtual machine provided and we are supposed to analyze the system and identify system vulnerabilities and find the hidden flag.
+
+### Approach and Process
+
+After setting up the virtual machine after following the given instructions, we get a website that looks like this:
+
+<img width="850" height="450" alt="image" src="https://github.com/user-attachments/assets/d52e10ff-b9bf-441a-8fdf-2290491f6ea9" />
+
+Well, I first registered and then logged in but everything seemed to be pretty normal.
+So I then thought of trying to find hidden directories, so I ran gobuster on my Kali Linux System using the command
+
+```gobuster dir -u <ip_address_of_website> -w <wordlist> -t <threads>```
+
+and it gave me a very slow output like this:
+
+<img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/ea3e193e-b870-487c-8b0d-57171bebe8f7" />
+
+Directory enumeration using Gobuster was attempted, however, the scan was extremely slow and did not reveal any immediately useful endpoints. 
+Given that this was a local VM with console access, I decided to lean toward system-level enumeration instead.
+
+During boot, I accessed the GRUB bootloader by pressing e on the default boot entry. Since GRUB was not password-protected, I was able to modify the kernel boot parameters.
+
+<img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/1c677cad-f828-4528-a4c8-fe18a0c41202" />
+
+By replacing the *ro quiet* arguments with *init=/bin/bash*, the system booted directly into a root shell without enforcing authentication.
+
+<img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/b0334640-68be-480a-8665-ca499c47c960" />
+
+<img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/39e971d9-a390-4a6b-b7a1-758fe9ce6994" />
+
+From the root shell, I enumerated the filesystem and navigated to /home/intern, where an executable file named secret_recipe was discovered.
+
+<img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/aa28b876-e056-45b3-bbff-0e4ce5c2af66" />
+
+The file had execute permissions and was owned by root, indicating it was likely relevant to the challenge.
+
+<img width="728" height="407" alt="image" src="https://github.com/user-attachments/assets/8a26dc04-8f67-4b55-a9f6-b29e34ecb249" />
+
+Well, that was quite easier and quicker compared to the hidden directory scan which I think is still going on.
+
+Flag: ```gdg{5utd0_ld3_l3_5tndw1ch}```
+
+### Conclusion
+
+Although the challenge initially appeared web-focused, the lack of bootloader protection allowed for direct root access via GRUB. This highlights the importance of securing physical and boot-level access, as it can completely bypass higher-level security controls.
+
+### Identified Vulnerability
+- Unprotected GRUB bootloader
+- Allows modification of kernel parameters
+- Leads to unauthenticated root shell access
